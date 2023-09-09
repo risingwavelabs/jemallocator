@@ -32,7 +32,7 @@ option! {
 
 option! {
     prefix[ str: b"prof.prefix\0", str: 2 ] => &'static CStr |
-    ops: w |
+    ops: r, w |
     docs:
     /// Set the filename prefix for profile dumps. See opt.prof_prefix for the default setting.
     ///
