@@ -2,6 +2,8 @@
 //!
 //! These settings are controlled by the `MALLOC_CONF` environment variable.
 
+use core::ffi::CStr;
+
 option! {
     abort[ str: b"opt.abort\0", non_str: 2 ] => bool |
     ops: r |
@@ -241,7 +243,7 @@ option! {
 }
 
 option! {
-    prof_prefix[ str: b"opt.prof_prefix\0", str: 2 ] => &'static str |
+    prof_prefix[ str: b"opt.prof_prefix\0", str: 2 ] => &'static CStr |
     ops: r |
     docs:
     /// Filename prefix for profile dumps. If the prefix is set to the empty string,
@@ -261,7 +263,7 @@ option! {
     /// {
     ///     use tikv_jemalloc_ctl::opt;
     ///     let prof_prefix = opt::prof_prefix::read().unwrap();
-    ///     println!("prof_prefix: {}", prof_prefix);
+    ///     println!("prof_prefix: {}", prof_prefix.to_str());
     /// }
     /// # }
     /// ```
