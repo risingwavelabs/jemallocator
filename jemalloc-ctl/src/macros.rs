@@ -74,7 +74,8 @@ macro_rules! r {
                 }
                 match $byte_string.as_slice() {
                     b"opt.prof\0" |
-                    b"prof.active\0"
+                    b"prof.active\0" |
+                    b"opt.prof_prefix\0"
                     if !cfg!(feature = "profiling") => return,
                     _ => (),
                 }

@@ -239,3 +239,31 @@ option! {
     /// ```
     mib_docs: /// See [`prof`].
 }
+
+option! {
+    prof_prefix[ str: b"opt.prof_prefix\0", str: 2 ] => &'static str |
+    ops: r |
+    docs:
+    /// Filename prefix for profile dumps. If the prefix is set to the empty string,
+    /// no automatic dumps will occur; this is primarily useful for disabling the
+    /// automatic final heap dump (which also disables leak reporting, if enabled).
+    /// The default prefix is `jeprof`.
+    /// This prefix value can be overridden by `prof.prefix`.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// # #[global_allocator]
+    /// # static ALLOC: tikv_jemallocator::Jemalloc = tikv_jemallocator::Jemalloc;
+    /// #
+    /// # fn main() {
+    /// #[cfg(feature = "profiling")]
+    /// {
+    ///     use tikv_jemalloc_ctl::opt;
+    ///     let prof_prefix = opt::prof_prefix::read().unwrap();
+    ///     println!("prof_prefix: {}", prof_prefix);
+    /// }
+    /// # }
+    /// ```
+    mib_docs: /// See [`prof_prefix`].
+}
